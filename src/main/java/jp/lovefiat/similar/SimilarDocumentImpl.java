@@ -32,13 +32,13 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	}
 	/**
 	 * 共有クラスタを返す
-	 * @return
+	 * @return 共有クラスタ
 	 */
 	abstract protected Collection<String> getSharedCluster();
 	/**
 	 * 共有クラスタを作成する
 	 * 
-	 * @return
+	 * @return 作成した共有クラスタ
 	 */
 	abstract protected Collection<String> newSharedCluster();
 	/**
@@ -46,13 +46,13 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	 * 
 	 * @param vec1 ベクトル化された比較項目１
 	 * @param vec2 ベクトル化された比較項目２
-	 * @return
+	 * @return スコア
 	 */
 	abstract protected float calculate(Map<String, Integer> vec1, Map<String, Integer> vec2);
 	
 	/**
 	 * 学習する
-	 * @param words
+	 * @param words ワードリスト
 	 */
 	public void train(Collection<String> words) {
 		
@@ -66,7 +66,7 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	 * 学習する
 	 * 
 	 * @param cls 集団
-	 * @param words
+	 * @param words ワードリスト
 	 */
 	protected void train(Collection<String> cls, Collection<String> words) {
 		cls.addAll(words);
@@ -74,12 +74,12 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	/**
 	 * 母集団よりベクトル枠を作成
 	 * 
-	 * @return
+	 * @return ベクター
 	 */
 	protected Map<String, Integer> getVector() {
 		Map<String, Integer> vec = new HashMap<>();
 		for (String word : mInstantCluster) {
-			vec.put(word, new Integer(0));
+			vec.put(word, 0);
 		}
 		
 		return vec;
@@ -87,8 +87,8 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	/**
 	 * ベクトル化
 	 * 
-	 * @param words
-	 * @return
+	 * @param words ワードリスト
+	 * @return ベクター
 	 */
 	protected Map<String, Integer> vectorize(Collection<String> words) {
 		
@@ -101,8 +101,8 @@ public abstract class SimilarDocumentImpl implements SimilarDocument {
 	/**
 	 * ベクトル更新
 	 * 
-	 * @param vec
-	 * @param word
+	 * @param vec ベクター
+	 * @param word ワード
 	 */
 	protected void appendVector(Map<String, Integer> vec, String word) {
 		Integer i;
